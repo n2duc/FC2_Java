@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package n2d;
 
 /**
@@ -150,6 +146,103 @@ public class Linked {
             }
         }
     }
+    void reverse() {
+        if (head == null) System.out.println("Khong the dao mang");
+        else {
+            Node current = head, p = null;
+            while (current != null) {
+                Node temp = current.next;
+                current.next = p;
+                p = current;
+                current = temp;
+            }
+            while (p != null) {
+                System.out.print(p);
+                p = p.next;
+            }
+            System.out.print("null\n");
+        }
+    }
+    boolean checkIncrease() {
+        if (head == null) {
+            return true;
+        }
+        for (Node p = head; p.next != null; p = p.next) {
+            if (p.data > p.next.data) {
+                return false;
+            }
+        }
+        return true;
+    }
+    void deleteOddElement() {
+        if (head == null) System.out.println("Khong the xoa");
+        else {
+            while (head != null && head.data % 2 == 1) {
+                head = head.next;
+            }
+            Node p = head;
+            while (p != null && p.next != null) {
+                if (p.next.data % 2 == 1) {
+                    p.next = p.next.next;
+                } else {
+                    p = p.next;
+                }
+            }
+        }
+    }
+    void sortList() {
+        Node p = head, t = null;
+        int temp;
+        if (head == null) {
+            System.out.println("Khong the sap xep duoc");
+        } else {
+            while (p != null) {
+                t = p.next;
+                while (t != null) {
+                    if (p.data > t.data) {
+                        temp = p.data;
+                        p.data = t.data;
+                        t.data = temp;
+                    }
+                    t = t.next;
+                }
+                p = p.next;
+            }
+        }
+    }
+    void insertIncreaseList(Node x) {
+        if(!checkIncrease()) {
+            System.out.println("Danh sach chua tang dan!");
+        } else {
+            Node t;
+            if (head == null || head.data >= x.data) {
+                x.next = head;
+                head = x;
+            } else {
+                t = head;
+                while (t.next != null && t.next.data < x.data) {
+                    t = t.next;
+                }
+                x.next = t.next;
+                t.next = x;
+            }
+        }
+    }
+    void printMidleNode() {
+        if (head == null) System.out.println("Mang rong khong the thuc hien!");
+        else {
+            int count = 0;
+            Node mid = head;
+            while (head != null) {
+                if ((count % 2) == 1) mid = mid.next;
+                ++count;
+                head = head.next;
+            }
+            if (mid != null) {
+                System.out.println("Middle Node: " + mid.data);
+            }
+        }
+    }
     public static void main(String[] args) {
         Linked l = new Linked();
 //        l.add(3); l.add(5); l.add(6); l.add(9); l.add(1);
@@ -158,13 +251,25 @@ public class Linked {
         System.out.println("Total number of Node: " + l.totalNode());
         System.out.println("Odd number of Node: " + l.oddNode());
         System.out.println("Max number of Node: " + l.maxNode());
-        l.appendNode(10);
-        l.insert(8, 3);
+//        l.appendNode(10);
+//        l.insert(8, 3);
+//        l.in();
+//        l.deleteFirst();
+//        l.deleteEnd();
+//        l.deleteK(2);
+//        l.reverse();
+        l.sortList();
         l.in();
-        l.deleteFirst();
-        l.deleteEnd();
-        l.deleteK(2);
+        l.insertIncreaseList(4);
         l.in();
+//        l.deleteOddElement();
+//        if (l.checkIncrease()) {
+//            System.out.println("Tang");
+//        } else {
+//            System.out.println("Khong tang");
+//        }
+//        l.in();
+//        l.printMidleNode();        
     }
 }
 
