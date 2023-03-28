@@ -260,7 +260,7 @@ public class Linked {
 //        l.reverse();
         l.sortList();
         l.in();
-        l.insertIncreaseList(4);
+        l.insertIncreaseList(new Node(4));
         l.in();
 //        l.deleteOddElement();
 //        if (l.checkIncrease()) {
